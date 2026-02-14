@@ -28,16 +28,16 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
       - name: Restore dependencies
-        run: dotnet restore src/extensions-assertions.sln
+        run: dotnet restore src/extensions-assertions.slnx
 
       - name: Build
-        run: dotnet build src/extensions-assertions.sln --no-restore --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }}
+        run: dotnet build src/extensions-assertions.slnx --no-restore --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }}
 
       - name: Test
-        run: dotnet test src/extensions-assertions.sln --no-build --configuration Release --verbosity normal
+        run: dotnet test src/extensions-assertions.slnx --no-build --configuration Release --verbosity normal
 
       - name: Pack
-        run: dotnet pack src/extensions-assertions.sln --no-build --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }} --output ./packages
+        run: dotnet pack src/extensions-assertions.slnx --no-build --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }} --output ./packages
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4

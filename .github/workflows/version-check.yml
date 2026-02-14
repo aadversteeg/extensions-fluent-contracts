@@ -25,16 +25,16 @@ jobs:
           echo "Extracted version: $VERSION"
 
       - name: Restore dependencies
-        run: dotnet restore src/extensions-assertions.sln
+        run: dotnet restore src/extensions-assertions.slnx
 
       - name: Build with version
-        run: dotnet build src/extensions-assertions.sln --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }}
+        run: dotnet build src/extensions-assertions.slnx --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }}
 
       - name: Test
-        run: dotnet test src/extensions-assertions.sln --no-build --configuration Release
+        run: dotnet test src/extensions-assertions.slnx --no-build --configuration Release
 
       - name: Pack
-        run: dotnet pack src/extensions-assertions.sln --no-build --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }} --output ./packages
+        run: dotnet pack src/extensions-assertions.slnx --no-build --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }} --output ./packages
 
       - name: Upload packages as artifacts
         uses: actions/upload-artifact@v4
