@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.Objects
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for object assertions containing all assertion methods.

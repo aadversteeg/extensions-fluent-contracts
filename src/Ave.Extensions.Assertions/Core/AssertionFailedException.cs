@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.Core
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Thrown by <c>Must()</c> when no test framework is detected.

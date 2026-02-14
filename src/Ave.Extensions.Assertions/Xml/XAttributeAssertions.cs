@@ -2,7 +2,7 @@ using System.Xml.Linq;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 
-namespace Ave.Extensions.Assertions.Xml
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for XAttribute values.

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ave.Extensions.Assertions.Collections
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class containing assertion methods for collections.

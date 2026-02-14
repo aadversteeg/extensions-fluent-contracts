@@ -1,6 +1,6 @@
+using Ave.Extensions.Assertions;
 using System;
 using System.Xml.Linq;
-using Ave.Extensions.Assertions.Xml;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 using Xunit;

@@ -1,4 +1,4 @@
-namespace Ave.Extensions.Assertions.Boolean
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods providing Should() and Must() entry points for boolean types.

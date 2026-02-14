@@ -1,7 +1,7 @@
 using Ave.Extensions.Assertions;
 using Ave.Extensions.ErrorPaths;
 
-namespace Ave.Extensions.Assertions.Strings
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Error codes for string assertions.

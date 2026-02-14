@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Ave.Extensions.Assertions.Collections
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class containing assertion methods for string collections.

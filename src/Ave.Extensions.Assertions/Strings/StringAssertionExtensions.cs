@@ -1,4 +1,4 @@
-namespace Ave.Extensions.Assertions.Strings
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods for string assertions.

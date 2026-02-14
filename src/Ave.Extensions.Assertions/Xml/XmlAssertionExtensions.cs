@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace Ave.Extensions.Assertions.Xml
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods providing Should() and Must() entry points for XML types.

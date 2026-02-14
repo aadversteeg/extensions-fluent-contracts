@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Ave.Extensions.Assertions.Strings
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for string assertions containing all assertion methods.

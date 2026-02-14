@@ -1,4 +1,4 @@
-namespace Ave.Extensions.Assertions.Boolean
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for nullable boolean values.

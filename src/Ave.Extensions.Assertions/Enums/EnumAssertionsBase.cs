@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace Ave.Extensions.Assertions.Enums
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for enum assertions containing all assertion methods.

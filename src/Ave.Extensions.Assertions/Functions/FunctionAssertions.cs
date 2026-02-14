@@ -2,7 +2,7 @@ using System;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 
-namespace Ave.Extensions.Assertions.Functions
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for Func{T} delegates.

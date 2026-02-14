@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.DateTimes
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods providing Should() and Must() entry points for DateTime and related types.

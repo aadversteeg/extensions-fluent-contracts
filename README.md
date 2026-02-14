@@ -19,7 +19,7 @@ dotnet add package Ave.Extensions.Assertions
 Use `Must()` in your tests. It auto-detects your test framework (xUnit, NUnit, MSTest, TUnit) and throws the appropriate assertion exception on failure.
 
 ```csharp
-using Ave.Extensions.Assertions.Strings;
+using Ave.Extensions.Assertions;
 
 [Fact]
 public void Name_should_start_with_capital()
@@ -39,7 +39,7 @@ public void Name_should_start_with_capital()
 Use `Should()` in production code for validation. Returns `Result<T, Error>` instead of throwing.
 
 ```csharp
-using Ave.Extensions.Assertions.Strings;
+using Ave.Extensions.Assertions;
 using Ave.Extensions.Functional;
 
 Result<string?, Error> result = input.Should()
@@ -211,8 +211,7 @@ Since `Should()` returns `Result<T, Error>`, it integrates seamlessly with `Ave.
 ### Chaining with OnSuccessBind
 
 ```csharp
-using Ave.Extensions.Assertions.Strings;
-using Ave.Extensions.Assertions.Numeric;
+using Ave.Extensions.Assertions;
 using Ave.Extensions.Functional;
 
 // Chain validations - each step only runs if previous succeeded
@@ -310,7 +309,7 @@ The library supports two extensibility patterns: adding custom assertions to exi
 Extend the base classes to add assertions that work with both `Should()` and `Must()`:
 
 ```csharp
-using Ave.Extensions.Assertions.Strings;
+using Ave.Extensions.Assertions;
 using Ave.Extensions.ErrorPaths;
 
 namespace Acme.Assertions;
@@ -356,7 +355,7 @@ Result<string?, Error> result = callbackUrl.Should().BeAbsoluteUri().And.UseHttp
 Create an `Ensure()` API for constructor guard clauses that throws `ArgumentException`:
 
 ```csharp
-using Ave.Extensions.Assertions.Strings;
+using Ave.Extensions.Assertions;
 
 namespace Acme.Assertions;
 

@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.DateTimes
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for TimeSpan assertions containing all assertion methods.

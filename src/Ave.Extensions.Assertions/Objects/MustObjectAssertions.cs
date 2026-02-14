@@ -1,4 +1,4 @@
-namespace Ave.Extensions.Assertions.Objects
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for general object values.

@@ -1,4 +1,4 @@
-namespace Ave.Extensions.Assertions.Objects
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods for object assertions.

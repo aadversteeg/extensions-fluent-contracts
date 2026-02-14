@@ -1,4 +1,4 @@
-using Ave.Extensions.Assertions.Objects;
+using Ave.Extensions.Assertions;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 using Xunit;

@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Linq;
 
-namespace Ave.Extensions.Assertions.Xml
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for XDocument assertions containing all assertion methods.

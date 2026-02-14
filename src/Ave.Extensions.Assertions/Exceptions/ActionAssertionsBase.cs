@@ -2,7 +2,7 @@ using System;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 
-namespace Ave.Extensions.Assertions.Exceptions
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for action assertions containing shared functionality.

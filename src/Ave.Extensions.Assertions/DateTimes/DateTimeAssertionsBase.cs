@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ave.Extensions.Assertions.DateTimes
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for DateTime assertions containing all assertion methods.

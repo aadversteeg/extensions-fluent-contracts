@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.Types
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods for Type assertions.

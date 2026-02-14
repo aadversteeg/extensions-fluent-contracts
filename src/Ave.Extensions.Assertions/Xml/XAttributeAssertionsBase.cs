@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace Ave.Extensions.Assertions.Xml
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for XAttribute assertions containing all assertion methods.

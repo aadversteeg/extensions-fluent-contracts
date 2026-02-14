@@ -1,5 +1,5 @@
+using Ave.Extensions.Assertions;
 using System;
-using Ave.Extensions.Assertions.Functions;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 using Xunit;
@@ -346,14 +346,15 @@ namespace UnitTests.Extensions.Assertions.Functions
 
         #region Invoking
 
-        [Fact(DisplayName = "FA-024: Invoking allows asserting on object method result")]
+        [Fact(DisplayName = "FA-024: Function assertion allows asserting on return value")]
         public void FA024()
         {
             // Arrange
             var subject = "hello world";
+            Func<int> func = () => subject.Length;
 
             // Act
-            Result<Func<int>, Error> result = subject.Invoking(s => s.Length).Return(11);
+            Result<Func<int>, Error> result = func.Should().Return(11);
 
             // Assert
             Assert.True(result.IsSuccess);
@@ -366,7 +367,7 @@ namespace UnitTests.Extensions.Assertions.Functions
             string? subject = null;
 
             // Act
-            Result<NullReferenceException?, Error> result = subject.Invoking(s => s!.Length).Throw<NullReferenceException>();
+            Result<NullReferenceException?, Error> result = subject.Invoking(s => s!.Length).Should().Throw<NullReferenceException>();
 
             // Assert
             Assert.True(result.IsSuccess);

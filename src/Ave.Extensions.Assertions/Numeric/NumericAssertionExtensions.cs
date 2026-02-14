@@ -1,4 +1,4 @@
-namespace Ave.Extensions.Assertions.Numeric
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods providing Should() and Must() entry points for numeric types.

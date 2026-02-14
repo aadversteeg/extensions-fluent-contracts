@@ -1,6 +1,6 @@
 using Ave.Extensions.ErrorPaths;
 
-namespace Ave.Extensions.Assertions.Comparable
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Error codes for IComparable assertions.

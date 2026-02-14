@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.Enums
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods for enum assertions.

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Ave.Extensions.Assertions.Dictionaries
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods providing Should() and Must() entry points for dictionary types.

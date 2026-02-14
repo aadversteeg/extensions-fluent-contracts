@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 
-namespace Ave.Extensions.Assertions.Collections
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for string collections. Returns Result types on implicit conversion.

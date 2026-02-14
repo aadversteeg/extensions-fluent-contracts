@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace Ave.Extensions.Assertions.Xml
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for XAttribute values.

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ave.Extensions.Assertions.Numeric
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for nullable numeric assertions containing all assertion methods.

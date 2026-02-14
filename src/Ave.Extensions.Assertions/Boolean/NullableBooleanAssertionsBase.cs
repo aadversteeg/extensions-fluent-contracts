@@ -1,4 +1,4 @@
-namespace Ave.Extensions.Assertions.Boolean
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for nullable boolean assertions containing all assertion methods.

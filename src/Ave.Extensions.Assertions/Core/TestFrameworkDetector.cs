@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Ave.Extensions.Assertions.Core
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Auto-detects the active test framework and throws framework-specific exceptions.

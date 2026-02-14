@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.Functions
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for Func{T} delegates.

@@ -1,6 +1,6 @@
 using Ave.Extensions.ErrorPaths;
 
-namespace Ave.Extensions.Assertions.Collections
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Error codes for collection assertions.

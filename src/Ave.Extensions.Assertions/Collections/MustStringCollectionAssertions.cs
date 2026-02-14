@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Ave.Extensions.Assertions.Collections
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for string collections that throw on failure.

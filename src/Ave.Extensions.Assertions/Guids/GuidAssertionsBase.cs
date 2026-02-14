@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.Guids
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for Guid assertions containing all assertion methods.

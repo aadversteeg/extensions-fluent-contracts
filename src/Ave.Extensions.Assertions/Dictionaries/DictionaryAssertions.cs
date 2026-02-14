@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 
-namespace Ave.Extensions.Assertions.Dictionaries
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for dictionaries.

@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.Comparable
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Contains assertion methods for IComparable{T} values.

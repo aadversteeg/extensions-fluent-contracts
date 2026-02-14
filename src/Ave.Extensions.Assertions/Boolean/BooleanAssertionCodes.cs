@@ -1,7 +1,7 @@
 using Ave.Extensions.Assertions;
 using Ave.Extensions.ErrorPaths;
 
-namespace Ave.Extensions.Assertions.Boolean
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Error codes for boolean assertions.

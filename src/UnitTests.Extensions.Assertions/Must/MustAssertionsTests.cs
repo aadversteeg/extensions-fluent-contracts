@@ -1,11 +1,5 @@
+using Ave.Extensions.Assertions;
 using System;
-using Ave.Extensions.Assertions.Boolean;
-using Ave.Extensions.Assertions.Core;
-using Ave.Extensions.Assertions.Numeric;
-using Ave.Extensions.Assertions.Strings;
-using Ave.Extensions.Assertions.Objects;
-using Ave.Extensions.Assertions.Guids;
-using Ave.Extensions.Assertions.Collections;
 using Xunit;
 using Xunit.Sdk;
 

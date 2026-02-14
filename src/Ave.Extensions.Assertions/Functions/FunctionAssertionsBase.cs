@@ -1,8 +1,7 @@
 using System;
-using Ave.Extensions.Assertions.Exceptions;
 using Ave.Extensions.ErrorPaths;
 
-namespace Ave.Extensions.Assertions.Functions
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class containing assertion methods for Func{T} delegates.

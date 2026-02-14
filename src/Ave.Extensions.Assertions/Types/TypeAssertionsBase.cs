@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Ave.Extensions.Assertions.Types
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for Type assertions containing all assertion methods.

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Ave.Extensions.Assertions.Comparable
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class containing assertion methods for IComparable{T} values.

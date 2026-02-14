@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Ave.Extensions.Assertions.Collections
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Extension methods providing Should() and Must() entry points for collection types.

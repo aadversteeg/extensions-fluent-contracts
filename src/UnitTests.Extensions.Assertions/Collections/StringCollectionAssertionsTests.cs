@@ -1,5 +1,5 @@
+using Ave.Extensions.Assertions;
 using System.Collections.Generic;
-using Ave.Extensions.Assertions.Collections;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 using Xunit;

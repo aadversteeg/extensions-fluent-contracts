@@ -1,6 +1,6 @@
 using System;
 
-namespace Ave.Extensions.Assertions.Exceptions
+namespace Ave.Extensions.Assertions
 {
     /// <summary>
     /// Base class for exception assertions containing all assertion methods.
