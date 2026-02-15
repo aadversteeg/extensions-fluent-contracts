@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>true</IsPackable>
+    <Description>Should() entry points for Ave.Extensions.FluentContracts. Returns Result&lt;T, Error&gt; on failure for production validation. Inspired by Design by Contract and RFC 2119.</Description>
+    <PackageTags>contracts;design-by-contract;fluent;validation;result;functional</PackageTags>
+    <Nullable>annotations</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ave.Extensions.FluentContracts\Ave.Extensions.FluentContracts.csproj" />
+  </ItemGroup>
+
+</Project>

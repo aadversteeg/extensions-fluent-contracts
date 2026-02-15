@@ -1,6 +1,26 @@
-# Ave.Extensions.Assertions
+# Ave.Extensions.FluentContracts
 
-A fluent assertion library for .NET with dual API: `Must()` for tests (throws on failure) and `Should()` for validation (returns `Result<T, Error>`).
+A fluent contract library for .NET with dual API: `Must()` for tests (throws on failure) and `Should()` for validation (returns `Result<T, Error>`).
+
+
+## Why Must() and Should()?
+
+The naming follows **RFC 2119** (IETF standard for requirement levels in specifications):
+
+| Keyword | RFC 2119 Meaning | This Library |
+|---------|-----------------|--------------|
+| **MUST** | "the definition is an absolute requirement" | Throws on violation |
+| **SHOULD** | "there may exist valid reasons in particular circumstances to ignore" | Returns Result, caller decides |
+
+Note: FluentAssertions uses `.Should()` for throwing assertions, which is semantically inverted per RFC 2119. This library aligns with the original RFC 2119 semantics.
+
+## Packages
+
+| Package | Purpose | Use In |
+|---------|---------|--------|
+| `Ave.Extensions.FluentContracts` | Core conditions and contract engine | Both |
+| `Ave.Extensions.FluentContracts.ForValidation` | `Should()` entry points | Production code |
+| `Ave.Extensions.FluentContracts.ForTesting` | `Must()` entry points | Test projects |
 
 ## Acknowledgements
 
@@ -9,7 +29,11 @@ This library is inspired by [FluentAssertions](https://github.com/fluentassertio
 ## Installation
 
 ```bash
-dotnet add package Ave.Extensions.Assertions
+# For production validation code
+dotnet add package Ave.Extensions.FluentContracts.ForValidation
+
+# For test projects
+dotnet add package Ave.Extensions.FluentContracts.ForTesting
 ```
 
 ## Two APIs: Must() vs Should()
@@ -19,7 +43,7 @@ dotnet add package Ave.Extensions.Assertions
 Use `Must()` in your tests. It auto-detects your test framework (xUnit, NUnit, MSTest, TUnit) and throws the appropriate assertion exception on failure.
 
 ```csharp
-using Ave.Extensions.Assertions;
+using Ave.Extensions.FluentContracts.ForTesting;
 
 [Fact]
 public void Name_should_start_with_capital()
@@ -39,7 +63,7 @@ public void Name_should_start_with_capital()
 Use `Should()` in production code for validation. Returns `Result<T, Error>` instead of throwing.
 
 ```csharp
-using Ave.Extensions.Assertions;
+using Ave.Extensions.FluentContracts.ForValidation;
 using Ave.Extensions.Functional;
 
 Result<string?, Error> result = input.Should()
@@ -49,7 +73,7 @@ Result<string?, Error> result = input.Should()
 if (result.IsFailure)
 {
     Console.WriteLine(result.Error.Message);
-    Console.WriteLine(result.Error.Code); // e.g., "Assertion/String/Contain"
+    Console.WriteLine(result.Error.Code); // e.g., "Contract/String/Contain"
 }
 ```
 
@@ -58,27 +82,29 @@ if (result.IsFailure)
 ### In Tests with Must()
 
 ```csharp
-// String assertions
+using Ave.Extensions.FluentContracts.ForTesting;
+
+// String contracts
 "hello world".Must()
     .NotBeNullOrEmpty()
     .And.StartWith("hello")
     .And.Contain("world");
 
-// Numeric assertions
+// Numeric contracts
 42.Must()
     .BePositive()
     .And.BeGreaterThan(0)
     .And.BeLessThan(100);
 
-// Collection assertions
+// Collection contracts
 new[] { 1, 2, 3 }.Must()
     .HaveCount(3)
     .And.Contain(2);
 
-// Boolean assertions
+// Boolean contracts
 true.Must().BeTrue();
 
-// Object assertions
+// Object contracts
 myObject.Must()
     .NotBeNull()
     .And.BeOfType<MyClass>();
@@ -87,6 +113,8 @@ myObject.Must()
 ### In Production with Should()
 
 ```csharp
+using Ave.Extensions.FluentContracts.ForValidation;
+
 public Result<User, Error> ValidateUser(User user)
 {
     Result<string?, Error> nameResult = user.Name.Should()
@@ -107,45 +135,45 @@ public Result<User, Error> ValidateUser(User user)
 }
 ```
 
-## Available Assertion Types
+## Available Contract Types
 
 ### Primitive Types
-- **BooleanAssertions** - `BeTrue()`, `BeFalse()`, `Be()`, `NotBe()`, `Imply()`
-- **NumericAssertions** - `Be()`, `NotBe()`, `BePositive()`, `BeNegative()`, `BeGreaterThan()`, `BeLessThan()`, `BeInRange()`, `BeOneOf()`
-- **StringAssertions** - `Be()`, `NotBe()`, `BeEmpty()`, `NotBeEmpty()`, `Contain()`, `StartWith()`, `EndWith()`, `MatchRegex()`, `HaveLength()`
-- **GuidAssertions** - `Be()`, `NotBe()`, `BeEmpty()`, `NotBeEmpty()`
+- **BooleanContracts** - `BeTrue()`, `BeFalse()`, `Be()`, `NotBe()`, `Imply()`
+- **NumericContracts** - `Be()`, `NotBe()`, `BePositive()`, `BeNegative()`, `BeGreaterThan()`, `BeLessThan()`, `BeInRange()`, `BeOneOf()`
+- **StringContracts** - `Be()`, `NotBe()`, `BeEmpty()`, `NotBeEmpty()`, `Contain()`, `StartWith()`, `EndWith()`, `MatchRegex()`, `HaveLength()`
+- **GuidContracts** - `Be()`, `NotBe()`, `BeEmpty()`, `NotBeEmpty()`
 
 ### Nullable Types
-- **NullableBooleanAssertions** - `HaveValue()`, `NotHaveValue()`, `BeNull()`, `NotBeNull()`, plus all boolean assertions
-- **NullableNumericAssertions** - `HaveValue()`, `NotHaveValue()`, plus all numeric assertions
+- **NullableBooleanContracts** - `HaveValue()`, `NotHaveValue()`, `BeNull()`, `NotBeNull()`, plus all boolean contracts
+- **NullableNumericContracts** - `HaveValue()`, `NotHaveValue()`, plus all numeric contracts
 
 ### Date and Time
-- **DateTimeAssertions** - `Be()`, `NotBe()`, `BeBefore()`, `BeAfter()`, `BeOnOrBefore()`, `BeOnOrAfter()`, `BeCloseTo()`, `HaveYear()`, `HaveMonth()`, `HaveDay()`
-- **DateTimeOffsetAssertions** - Same as DateTime plus `HaveOffset()`, `BeSameDateAs()`
-- **TimeSpanAssertions** - `Be()`, `NotBe()`, `BePositive()`, `BeNegative()`, `BeGreaterThan()`, `BeLessThan()`, `BeCloseTo()`
+- **DateTimeContracts** - `Be()`, `NotBe()`, `BeBefore()`, `BeAfter()`, `BeOnOrBefore()`, `BeOnOrAfter()`, `BeCloseTo()`, `HaveYear()`, `HaveMonth()`, `HaveDay()`
+- **DateTimeOffsetContracts** - Same as DateTime plus `HaveOffset()`, `BeSameDateAs()`
+- **TimeSpanContracts** - `Be()`, `NotBe()`, `BePositive()`, `BeNegative()`, `BeGreaterThan()`, `BeLessThan()`, `BeCloseTo()`
 
 ### Collections
-- **CollectionAssertions** - `BeEmpty()`, `NotBeEmpty()`, `HaveCount()`, `Contain()`, `NotContain()`, `ContainSingle()`, `OnlyContain()`, `BeSubsetOf()`, `BeInAscendingOrder()`, `BeInDescendingOrder()`
-- **StringCollectionAssertions** - All collection assertions plus `ContainMatch()`, `AllMatch()`, `ContainEquivalentOf()`, `NotContainNullOrEmpty()`
-- **DictionaryAssertions** - `BeEmpty()`, `NotBeEmpty()`, `HaveCount()`, `ContainKey()`, `ContainValue()`, `ContainKeyValuePair()`, `ContainKeys()`
+- **CollectionContracts** - `BeEmpty()`, `NotBeEmpty()`, `HaveCount()`, `Contain()`, `NotContain()`, `ContainSingle()`, `OnlyContain()`, `BeSubsetOf()`, `BeInAscendingOrder()`, `BeInDescendingOrder()`
+- **StringCollectionContracts** - All collection contracts plus `ContainMatch()`, `AllMatch()`, `ContainEquivalentOf()`, `NotContainNullOrEmpty()`
+- **DictionaryContracts** - `BeEmpty()`, `NotBeEmpty()`, `HaveCount()`, `ContainKey()`, `ContainValue()`, `ContainKeyValuePair()`, `ContainKeys()`
 
 ### Other Types
-- **ObjectAssertions** - `Be()`, `NotBe()`, `BeNull()`, `NotBeNull()`, `BeSameAs()`, `NotBeSameAs()`, `BeOfType()`, `BeAssignableTo()`
-- **TypeAssertions** - `Be()`, `NotBe()`, `BeAssignableTo()`, `NotBeAssignableTo()`, `Implement()`, `HaveAttribute()`
-- **EnumAssertions** - `Be()`, `NotBe()`, `HaveFlag()`, `NotHaveFlag()`, `BeDefined()`, `BeNull()`, `NotBeNull()`
-- **ComparableAssertions** - `Be()`, `NotBe()`, `BeGreaterThan()`, `BeLessThan()`, `BeInRange()`, `BeOneOf()`, `BeRankedEquallyTo()`
+- **ObjectContracts** - `Be()`, `NotBe()`, `BeNull()`, `NotBeNull()`, `BeSameAs()`, `NotBeSameAs()`, `BeOfType()`, `BeAssignableTo()`
+- **TypeContracts** - `Be()`, `NotBe()`, `BeAssignableTo()`, `NotBeAssignableTo()`, `Implement()`, `HaveAttribute()`
+- **EnumContracts** - `Be()`, `NotBe()`, `HaveFlag()`, `NotHaveFlag()`, `BeDefined()`, `BeNull()`, `NotBeNull()`
+- **ComparableContracts** - `Be()`, `NotBe()`, `BeGreaterThan()`, `BeLessThan()`, `BeInRange()`, `BeOneOf()`, `BeRankedEquallyTo()`
 
 ### Exceptions and Functions
-- **ActionAssertions** - `Throw<T>()`, `ThrowExactly<T>()`, `NotThrow()`, `NotThrow<T>()`
-- **ExceptionAssertions** - `WithMessage()`, `WithInnerException<T>()`, `Where()`
-- **FunctionAssertions** - `Return()`, `NotReturn()`, `ReturnNotNull()`, `ReturnNull()`, `Satisfy()`, `Throw<T>()`, `NotThrow()`
+- **ActionContracts** - `Throw<T>()`, `ThrowExactly<T>()`, `NotThrow()`, `NotThrow<T>()`
+- **ExceptionContracts** - `WithMessage()`, `WithInnerException<T>()`, `Where()`
+- **FunctionContracts** - `Return()`, `NotReturn()`, `ReturnNotNull()`, `ReturnNull()`, `Satisfy()`, `Throw<T>()`, `NotThrow()`
 
 ### XML
-- **XDocumentAssertions** - `HaveRoot()`, `HaveElement()`
-- **XElementAssertions** - `HaveAttribute()`, `HaveValue()`, `HaveElement()`
-- **XAttributeAssertions** - `HaveValue()`
+- **XDocumentContracts** - `HaveRoot()`, `HaveElement()`
+- **XElementContracts** - `HaveAttribute()`, `HaveValue()`, `HaveElement()`
+- **XAttributeContracts** - `HaveValue()`
 
-## Chaining Assertions
+## Chaining Contracts
 
 Both `Must()` and `Should()` support fluent chaining with the `And` property:
 
@@ -166,11 +194,11 @@ Result<string?, Error> result = "hello world".Should()
 
 ## Error Codes
 
-Each assertion failure produces a structured error code following the pattern `Assertion/{Type}/{Method}`:
+Each contract failure produces a structured error code following the pattern `Contract/{Type}/{Method}`:
 
 ```csharp
 var result = "hello".Should().StartWith("world");
-// result.Error.Code == "Assertion/String/StartWith"
+// result.Error.Code == "Contract/String/StartWith"
 ```
 
 ## Exception Testing
@@ -200,7 +228,7 @@ safeAction.Must().NotThrow();
 | NUnit | `NUnit.Framework.AssertionException` |
 | MSTest | `Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException` |
 | TUnit | `TUnit.Assertions.Exceptions.AssertionException` |
-| None | `AssertionFailedException` (fallback) |
+| None | `ContractViolationException` (fallback) |
 
 No configuration or adapter packages needed. Detection runs once on first failure and caches the result.
 
@@ -211,7 +239,7 @@ Since `Should()` returns `Result<T, Error>`, it integrates seamlessly with `Ave.
 ### Chaining with OnSuccessBind
 
 ```csharp
-using Ave.Extensions.Assertions;
+using Ave.Extensions.FluentContracts.ForValidation;
 using Ave.Extensions.Functional;
 
 // Chain validations - each step only runs if previous succeeded
@@ -302,43 +330,43 @@ public Result<Registration, Error[]> ValidateRegistration(Registration reg)
 
 ## Extensibility
 
-The library supports two extensibility patterns: adding custom assertions to existing types, and creating entirely new API entry points.
+The library supports two extensibility patterns: adding custom contracts to existing types, and creating entirely new API entry points.
 
-### Adding Custom Assertions
+### Adding Custom Contracts
 
-Extend the base classes to add assertions that work with both `Should()` and `Must()`:
+Extend the base classes to add contracts that work with both `Should()` and `Must()`:
 
 ```csharp
-using Ave.Extensions.Assertions;
+using Ave.Extensions.FluentContracts;
 using Ave.Extensions.ErrorPaths;
 
-namespace Acme.Assertions;
+namespace Acme.Contracts;
 
-public static class UrlAssertionCodes
+public static class UrlContractCodes
 {
-    public static readonly ErrorCode BeAbsoluteUri = ErrorCode.Parse("Assertion/Url/BeAbsoluteUri");
-    public static readonly ErrorCode UseHttps = ErrorCode.Parse("Assertion/Url/UseHttps");
+    public static readonly ErrorCode BeAbsoluteUri = ErrorCode.Parse("Contract/Url/BeAbsoluteUri");
+    public static readonly ErrorCode UseHttps = ErrorCode.Parse("Contract/Url/UseHttps");
 }
 
-public static class UrlStringAssertions
+public static class UrlStringContracts
 {
-    public static TSelf BeAbsoluteUri<TSelf>(this StringAssertionsBase<TSelf> assertions)
-        where TSelf : StringAssertionsBase<TSelf>
+    public static TSelf BeAbsoluteUri<TSelf>(this StringContractsBase<TSelf> contracts)
+        where TSelf : StringContractsBase<TSelf>
     {
-        return assertions.Assert(
+        return contracts.Assert(
             s => Uri.TryCreate(s, UriKind.Absolute, out _),
-            UrlAssertionCodes.BeAbsoluteUri,
-            $"Expected absolute URI but found '{assertions.Subject ?? "(null)"}'");
+            UrlContractCodes.BeAbsoluteUri,
+            $"Expected absolute URI but found '{contracts.Subject ?? "(null)"}'");
     }
 
-    public static TSelf UseHttps<TSelf>(this StringAssertionsBase<TSelf> assertions)
-        where TSelf : StringAssertionsBase<TSelf>
+    public static TSelf UseHttps<TSelf>(this StringContractsBase<TSelf> contracts)
+        where TSelf : StringContractsBase<TSelf>
     {
-        return assertions.Assert(
+        return contracts.Assert(
             s => Uri.TryCreate(s, UriKind.Absolute, out var uri) &&
                  uri.Scheme == Uri.UriSchemeHttps,
-            UrlAssertionCodes.UseHttps,
-            $"Expected HTTPS URL but found '{assertions.Subject ?? "(null)"}'");
+            UrlContractCodes.UseHttps,
+            $"Expected HTTPS URL but found '{contracts.Subject ?? "(null)"}'");
     }
 }
 ```
@@ -355,15 +383,15 @@ Result<string?, Error> result = callbackUrl.Should().BeAbsoluteUri().And.UseHttp
 Create an `Ensure()` API for constructor guard clauses that throws `ArgumentException`:
 
 ```csharp
-using Ave.Extensions.Assertions;
+using Ave.Extensions.FluentContracts;
 
-namespace Acme.Assertions;
+namespace Acme.Contracts;
 
-public sealed class EnsureStringAssertions : StringAssertionsBase<EnsureStringAssertions>
+public sealed class EnsureStringContracts : StringContractsBase<EnsureStringContracts>
 {
     private readonly string _paramName;
 
-    public EnsureStringAssertions(string? subject, string paramName)
+    public EnsureStringContracts(string? subject, string paramName)
         : base(subject, throwOnFailure: false)
     {
         _paramName = paramName;
@@ -376,8 +404,8 @@ public sealed class EnsureStringAssertions : StringAssertionsBase<EnsureStringAs
 
 public static class EnsureExtensions
 {
-    public static EnsureStringAssertions Ensure(this string? subject, string paramName)
-        => new EnsureStringAssertions(subject, paramName);
+    public static EnsureStringContracts Ensure(this string? subject, string paramName)
+        => new EnsureStringContracts(subject, paramName);
 }
 ```
 
@@ -395,35 +423,35 @@ public class User
 }
 ```
 
-### Domain-Specific Assertions: Money
+### Domain-Specific Contracts: Money
 
 ```csharp
-using Ave.Extensions.Assertions;
+using Ave.Extensions.FluentContracts;
 using Ave.Extensions.ErrorPaths;
 using Ave.Extensions.Functional;
 
-namespace Acme.Assertions;
+namespace Acme.Contracts;
 
 public readonly record struct Money(decimal Amount, string Currency);
 
-public static class MoneyAssertionCodes
+public static class MoneyContractCodes
 {
-    public static readonly ErrorCode BePositive = ErrorCode.Parse("Assertion/Money/BePositive");
-    public static readonly ErrorCode NotExceed = ErrorCode.Parse("Assertion/Money/NotExceed");
-    public static readonly ErrorCode BeCurrency = ErrorCode.Parse("Assertion/Money/BeCurrency");
+    public static readonly ErrorCode BePositive = ErrorCode.Parse("Contract/Money/BePositive");
+    public static readonly ErrorCode NotExceed = ErrorCode.Parse("Contract/Money/NotExceed");
+    public static readonly ErrorCode BeCurrency = ErrorCode.Parse("Contract/Money/BeCurrency");
 }
 
-public abstract class MoneyAssertionsBase<TSelf> : Assertions<Money, TSelf>
-    where TSelf : MoneyAssertionsBase<TSelf>
+public abstract class MoneyContractsBase<TSelf> : Contracts<Money, TSelf>
+    where TSelf : MoneyContractsBase<TSelf>
 {
-    protected MoneyAssertionsBase(Money subject, bool throwOnFailure)
+    protected MoneyContractsBase(Money subject, bool throwOnFailure)
         : base(subject, throwOnFailure) { }
 
     public TSelf BePositive()
     {
         return Assert(
             m => m.Amount > 0,
-            MoneyAssertionCodes.BePositive,
+            MoneyContractCodes.BePositive,
             $"Expected positive amount but found {Subject.Amount} {Subject.Currency}");
     }
 
@@ -431,7 +459,7 @@ public abstract class MoneyAssertionsBase<TSelf> : Assertions<Money, TSelf>
     {
         return Assert(
             m => m.Amount <= maxAmount,
-            MoneyAssertionCodes.NotExceed,
+            MoneyContractCodes.NotExceed,
             $"Expected amount not exceeding {maxAmount} but found {Subject.Amount} {Subject.Currency}");
     }
 
@@ -439,27 +467,27 @@ public abstract class MoneyAssertionsBase<TSelf> : Assertions<Money, TSelf>
     {
         return Assert(
             m => m.Currency.Equals(expectedCurrency, StringComparison.OrdinalIgnoreCase),
-            MoneyAssertionCodes.BeCurrency,
+            MoneyContractCodes.BeCurrency,
             $"Expected currency {expectedCurrency} but found {Subject.Currency}");
     }
 }
 
-public sealed class MoneyAssertions : MoneyAssertionsBase<MoneyAssertions>
+public sealed class MoneyContracts : MoneyContractsBase<MoneyContracts>
 {
-    public MoneyAssertions(Money subject) : base(subject, throwOnFailure: false) { }
+    public MoneyContracts(Money subject) : base(subject, throwOnFailure: false) { }
 
-    public static implicit operator Result<Money, Error>(MoneyAssertions a) => a.ToResult();
+    public static implicit operator Result<Money, Error>(MoneyContracts a) => a.ToResult();
 }
 
-public sealed class MustMoneyAssertions : MoneyAssertionsBase<MustMoneyAssertions>
+public sealed class MustMoneyContracts : MoneyContractsBase<MustMoneyContracts>
 {
-    public MustMoneyAssertions(Money subject) : base(subject, throwOnFailure: true) { }
+    public MustMoneyContracts(Money subject) : base(subject, throwOnFailure: true) { }
 }
 
-public static class MoneyAssertionExtensions
+public static class MoneyContractExtensions
 {
-    public static MoneyAssertions Should(this Money subject) => new(subject);
-    public static MustMoneyAssertions Must(this Money subject) => new(subject);
+    public static MoneyContracts Should(this Money subject) => new(subject);
+    public static MustMoneyContracts Must(this Money subject) => new(subject);
 }
 ```
 
@@ -478,29 +506,29 @@ public Result<Payment, Error> ProcessPayment(Money amount)
 payment.Amount.Must().BePositive().And.BeCurrency("EUR");
 ```
 
-### Domain-Specific Assertions: Date Ranges
+### Domain-Specific Contracts: Date Ranges
 
 ```csharp
 public readonly record struct DateRange(DateOnly Start, DateOnly End);
 
-public static class DateRangeAssertionCodes
+public static class DateRangeContractCodes
 {
-    public static readonly ErrorCode BeValid = ErrorCode.Parse("Assertion/DateRange/BeValid");
-    public static readonly ErrorCode NotExceedDays = ErrorCode.Parse("Assertion/DateRange/NotExceedDays");
-    public static readonly ErrorCode BeInFuture = ErrorCode.Parse("Assertion/DateRange/BeInFuture");
+    public static readonly ErrorCode BeValid = ErrorCode.Parse("Contract/DateRange/BeValid");
+    public static readonly ErrorCode NotExceedDays = ErrorCode.Parse("Contract/DateRange/NotExceedDays");
+    public static readonly ErrorCode BeInFuture = ErrorCode.Parse("Contract/DateRange/BeInFuture");
 }
 
-public abstract class DateRangeAssertionsBase<TSelf> : Assertions<DateRange, TSelf>
-    where TSelf : DateRangeAssertionsBase<TSelf>
+public abstract class DateRangeContractsBase<TSelf> : Contracts<DateRange, TSelf>
+    where TSelf : DateRangeContractsBase<TSelf>
 {
-    protected DateRangeAssertionsBase(DateRange subject, bool throwOnFailure)
+    protected DateRangeContractsBase(DateRange subject, bool throwOnFailure)
         : base(subject, throwOnFailure) { }
 
     public TSelf BeValid()
     {
         return Assert(
             r => r.Start <= r.End,
-            DateRangeAssertionCodes.BeValid,
+            DateRangeContractCodes.BeValid,
             $"Expected valid date range but Start ({Subject.Start}) is after End ({Subject.End})");
     }
 
@@ -508,7 +536,7 @@ public abstract class DateRangeAssertionsBase<TSelf> : Assertions<DateRange, TSe
     {
         return Assert(
             r => (r.End.ToDateTime(TimeOnly.MinValue) - r.Start.ToDateTime(TimeOnly.MinValue)).Days <= maxDays,
-            DateRangeAssertionCodes.NotExceedDays,
+            DateRangeContractCodes.NotExceedDays,
             $"Expected range not exceeding {maxDays} days");
     }
 
@@ -516,27 +544,27 @@ public abstract class DateRangeAssertionsBase<TSelf> : Assertions<DateRange, TSe
     {
         return Assert(
             r => r.Start > DateOnly.FromDateTime(DateTime.Today),
-            DateRangeAssertionCodes.BeInFuture,
+            DateRangeContractCodes.BeInFuture,
             $"Expected start date in the future but found {Subject.Start}");
     }
 }
 
-public sealed class DateRangeAssertions : DateRangeAssertionsBase<DateRangeAssertions>
+public sealed class DateRangeContracts : DateRangeContractsBase<DateRangeContracts>
 {
-    public DateRangeAssertions(DateRange subject) : base(subject, throwOnFailure: false) { }
+    public DateRangeContracts(DateRange subject) : base(subject, throwOnFailure: false) { }
 
-    public static implicit operator Result<DateRange, Error>(DateRangeAssertions a) => a.ToResult();
+    public static implicit operator Result<DateRange, Error>(DateRangeContracts a) => a.ToResult();
 }
 
-public sealed class MustDateRangeAssertions : DateRangeAssertionsBase<MustDateRangeAssertions>
+public sealed class MustDateRangeContracts : DateRangeContractsBase<MustDateRangeContracts>
 {
-    public MustDateRangeAssertions(DateRange subject) : base(subject, throwOnFailure: true) { }
+    public MustDateRangeContracts(DateRange subject) : base(subject, throwOnFailure: true) { }
 }
 
-public static class DateRangeAssertionExtensions
+public static class DateRangeContractExtensions
 {
-    public static DateRangeAssertions Should(this DateRange subject) => new(subject);
-    public static MustDateRangeAssertions Must(this DateRange subject) => new(subject);
+    public static DateRangeContracts Should(this DateRange subject) => new(subject);
+    public static MustDateRangeContracts Must(this DateRange subject) => new(subject);
 }
 ```
 

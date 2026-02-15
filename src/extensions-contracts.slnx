@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Ave.Extensions.FluentContracts/Ave.Extensions.FluentContracts.csproj" />
+  <Project Path="Ave.Extensions.FluentContracts.ForValidation/Ave.Extensions.FluentContracts.ForValidation.csproj" />
+  <Project Path="Ave.Extensions.FluentContracts.ForTesting/Ave.Extensions.FluentContracts.ForTesting.csproj" />
+  <Project Path="UnitTests.FluentContracts/UnitTests.FluentContracts.csproj" />
+  <Project Path="UnitTests.FluentContracts.ForValidation/UnitTests.FluentContracts.ForValidation.csproj" />
+  <Project Path="UnitTests.FluentContracts.ForTesting/UnitTests.FluentContracts.ForTesting.csproj" />
+</Solution>

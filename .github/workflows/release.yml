@@ -28,16 +28,16 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
       - name: Restore dependencies
-        run: dotnet restore src/extensions-assertions.slnx
+        run: dotnet restore src/extensions-contracts.slnx
 
       - name: Build
-        run: dotnet build src/extensions-assertions.slnx --no-restore --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }}
+        run: dotnet build src/extensions-contracts.slnx --no-restore --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }}
 
       - name: Test
-        run: dotnet test src/extensions-assertions.slnx --no-build --configuration Release --verbosity normal
+        run: dotnet test src/extensions-contracts.slnx --no-build --configuration Release --verbosity normal
 
       - name: Pack
-        run: dotnet pack src/extensions-assertions.slnx --no-build --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }} --output ./packages
+        run: dotnet pack src/extensions-contracts.slnx --no-build --configuration Release /p:Version=${{ steps.get_version.outputs.VERSION }} --output ./packages
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
@@ -48,7 +48,7 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          name: Ave.Extensions.Assertions ${{ steps.get_version.outputs.VERSION }}
+          name: Ave.Extensions.FluentContracts ${{ steps.get_version.outputs.VERSION }}
           files: ./packages/*.nupkg
           generate_release_notes: true
         env:

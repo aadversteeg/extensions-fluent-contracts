@@ -1,6 +1,11 @@
 # Release Process
 
-This document describes the process for releasing new versions of the Ave.Extensions.Assertions packages.
+This document describes the process for releasing new versions of the Ave.Extensions.FluentContracts packages.
+
+Note: Releases now produce 3 NuGet packages:
+- `Ave.Extensions.FluentContracts` - Core conditions and contract engine
+- `Ave.Extensions.FluentContracts.ForValidation` - Should() entry points for production validation
+- `Ave.Extensions.FluentContracts.ForTesting` - Must() entry points for test assertions
 
 ## Release with GitHub Tags
 

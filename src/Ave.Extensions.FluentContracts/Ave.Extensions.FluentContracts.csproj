@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsPackable>true</IsPackable>
+    <Description>Fluent contract conditions for .NET. Define precondition checks with a chainable API. Use with FluentContracts.ForValidation (returns Result) or FluentContracts.ForTesting (throws).</Description>
+    <PackageTags>contracts;design-by-contract;fluent;preconditions;conditions</PackageTags>
+    <Nullable>annotations</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ave.Extensions.Functional.Core" />
+    <PackageReference Include="Ave.Extensions.ErrorPaths" />
+  </ItemGroup>
+
+</Project>
